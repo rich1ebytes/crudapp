@@ -34,7 +34,7 @@ const editByUsername = async (req, res) => {
 
 const deleteByUsername = async (req, res) => {
   try {
-      await User.findOneAndDelete({
+    await User.findOneAndDelete({
       username: req.params.username,
     });
     res.status(201).json({ message: "Deleted" });
@@ -43,21 +43,20 @@ const deleteByUsername = async (req, res) => {
   }
 };
 
-const createNewAdmin = async (req, res) =>{
-  try{
-    const adminData = req.body
-    const newUser = await User.create(adminData)
-    res.status(200).json(newUser)
-  }catch(error){
-    res.status(400).json({message: error.message})
+const createNewAdmin = async (req, res) => {
+  try {
+    const adminData = req.body;
+    const newUser = await User.create(adminData);
+    res.status(200).json(newUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
 
-
-export  {
+export {
   getAdmins,
   getByUsername,
   editByUsername,
   deleteByUsername,
-  createNewAdmin
+  createNewAdmin,
 };

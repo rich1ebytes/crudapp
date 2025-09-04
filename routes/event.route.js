@@ -4,8 +4,9 @@ const router = express.Router();
 
 
 router.get("/",eventsList);
-router.delete("/:eventName",eventDeletion);
 router.post("/",eventsPost);
-router.put("/:eventName",eventEdit)
+router.put("/:id",eventEdit)
+router.delete("/:id",eventDeletion);
+
 
 export default router

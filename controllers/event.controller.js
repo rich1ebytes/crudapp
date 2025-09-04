@@ -1,7 +1,6 @@
 import NewEvent from "../models/eventregistration.model.js";
 
-
-const EventsPost = async (req, res) => {
+const eventsPost = async (req, res) => {
   try {
     const EventsPost = await NewEvent.create(req.body);
     if (EventsPost) res.status(200).json(EventsPost);
@@ -12,7 +11,7 @@ const EventsPost = async (req, res) => {
   }
 };
 
-const EventsList = async (req, res) => {
+const eventsList = async (req, res) => {
   try {
     const newEventsList = await NewEvent.find();
     if (newEventsList) res.status(200).json(newEventsList);
@@ -23,7 +22,7 @@ const EventsList = async (req, res) => {
   }
 };
 
-const EventDeletion = async (req, res) => {
+const eventDeletion = async (req, res) => {
   try {
     const { data } = req.params.eventName;
     const EventDeletion = await NewEvent.findOneAndDelete(data);
@@ -34,4 +33,17 @@ const EventDeletion = async (req, res) => {
   }
 };
 
-export {EventsPost, EventsList, EventDeletion };
+const eventEdit = async (req, res) => {
+  try {
+    const { data } = req.params.eventName;
+    const editDetails = await NewEvent.findOneandUpdate(data, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if(editDetails) res.status(200).json(editDetails)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { eventsList, eventsPost, eventEdit, eventDeletion };
